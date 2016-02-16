@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderLinesTable extends Migration
+class CreateWarehouseTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class CreateOrderLinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_lines', function (Blueprint $table) {
+        Schema::create('warehouse_transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->string('type');
             $table->integer('quantity');
-            $table->integer('subtotal_price');
-     
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->integer('price');
+            $table->string('reason');
+            
             $table->foreign('product_id')->references('id')->on('products');
             
             $table->timestamps();
@@ -33,6 +33,6 @@ class CreateOrderLinesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('order_lines');
+        Schema::drop('warehouse_transactions');
     }
 }

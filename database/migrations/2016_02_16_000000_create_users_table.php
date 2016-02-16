@@ -16,11 +16,15 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->integer('code')->unique();
-            $table->integer('rfid_code')->unique()->nullable();
+            $table->string('email')->unique();
+            $table->integer('pin')->unique();
+            $table->string('status');
+            $table->integer('rfid_nr')->unique()->nullable();
             $table->string('rfid_hex')->unique()->nullable();
-            $table->rememberToken();
             $table->timestamps();
+            
+            $table->integer('team_id')->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 
