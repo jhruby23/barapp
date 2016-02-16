@@ -13,6 +13,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
        User::create([
+       		'first_name' => '',
+        		'last_name' => 'Guest',
+        		'pin' => NULL,
+        		'team_id' => 1
+        ]);
+        
+       User::create([
        		'first_name' => 'Pan',
         		'last_name' => 'Test',
         		'pin' => 1234,
