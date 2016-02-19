@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Product;
+use Cart;
 
 class PagesController extends Controller
 {
@@ -33,6 +35,8 @@ class PagesController extends Controller
 			return redirect('/');
 			
 		Auth::login($user, true);
+		
+		Cart::destroy();
 	
 		return redirect('dashboard');
 	}
@@ -45,10 +49,28 @@ class PagesController extends Controller
 	}
 	
 	public function dashboard()
-	{
-		if(Auth::check())
-			print_r(Auth::user());
+	{		
+		$products = Product::with('category')->enabled()->get()->toArray();
 		
-		return view('dashboard');
+		$cart = Cart::content()->toArray();
+		
+		$price = Cart::total();
+		
+		return view('dashboard', compact('products', 'cart', 'price'));
 	}
+
+	public function addToCart($id)
+	{
+		$product = Product::find($id)->toArray();
+		
+		if(is_null(Auth::user()->pin))
+			$price = $product['guest_price'];
+		else
+			$price = $product['member_price'];
+		
+		Cart::add($id, $product['name'], 1, $price);
+		
+		return redirect('dashboard');
+	}
+	
 }

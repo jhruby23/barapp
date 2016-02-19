@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
        		'first_name' => '',
         		'last_name' => 'Guest',
         		'pin' => NULL,
+        		'status' => 'active',
         		'team_id' => 1
         ]);
         
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
        		'first_name' => 'Pan',
         		'last_name' => 'Test',
         		'pin' => 1234,
+        		'status' => 'active',
         		'team_id' => 1
         ]);
     }

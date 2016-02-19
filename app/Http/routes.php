@@ -25,18 +25,10 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'PagesController@showHome');
 	Route::post('/', 'PagesController@login');
-	
-	Route::get('/set', function(){
-	    Session::put('session', 'working');
-	    echo Session::get('session');
-	});
-	
-	Route::get('/get', function(){
-	    echo Session::get('session');
-	});
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('dashboard', 'PagesController@dashboard');
 	Route::get('logout', 'PagesController@logout');
+	Route::get('add-to-cart/{id}', ['uses' => 'PagesController@addToCart', 'as' => 'AddToCart']);
 });
