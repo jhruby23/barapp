@@ -7,20 +7,33 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 use Cart;
 use Auth;
 
 class DashboardController extends Controller
 {
+	public function __construct()
+	{
+		$this->updateCart();
+	}
+	
    public function showDashboard()
-	{		
+	{
+		//$cat = Category::with('products')->drinks()->get()->toArray();
+		//$products_new = [];
+		
 		$products = Product::with('category')->enabled()->get()->toArray();
 		
-		$cart = Cart::content()->toArray();
+		$this->updateCart();
 		
-		$price = Cart::total();
-		
-		return view('dashboard', compact('products', 'cart', 'price'));
+		return view('dashboard', ['products' => $products, 'items' => $this->items, 'price' => $this->price]);
+	}
+	
+	public function updateCart()
+	{
+		$this->items = Cart::content()->toArray();
+		$this->price = Cart::total();
 	}
 
 	public function addToCart($id)
@@ -34,7 +47,9 @@ class DashboardController extends Controller
 		
 		Cart::add($id, $product['name'], 1, $price);
 		
-		return redirect('dashboard');
+		$this->updateCart();
+		
+		return view('cart', ['items' => $this->items, 'price' => $this->price]);
 	}
 	
 	public function removeFromCart($id)
@@ -43,6 +58,17 @@ class DashboardController extends Controller
 		
 		Cart::remove($rowid);
 		
-		return redirect('dashboard');
+		$this->updateCart();
+		
+		return view('cart', ['items' => $this->items, 'price' => $this->price]);
+	}
+	
+	public function emptyCart()
+	{
+		Cart::destroy();	
+	
+		$this->updateCart();
+		
+		return view('cart', ['items' => $this->items, 'price' => $this->price]);
 	}
 }

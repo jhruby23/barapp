@@ -33,4 +33,5 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('dashboard', 'DashboardController@showDashboard');
 	Route::get('add-to-cart/{id}', ['uses' => 'DashboardController@addToCart', 'as' => 'cart.add']);
 	Route::get('remove-from-cart/{id}', ['uses' => 'DashboardController@removeFromCart', 'as' => 'cart.remove']);
+	Route::get('empty-cart', ['uses' => 'DashboardController@emptyCart', 'as' => 'cart.empty']);
 });

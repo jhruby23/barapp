@@ -6,19 +6,9 @@
 
 	{{ link_to_action('PagesController@logout', 'Cancel order') }}
 	
-	<h3>Shopping cart</h3>
-	<p>Total price: {{ $price }} Kč</p>
-	<ul>
-	@foreach($cart as $item)
-		<li>
-			<p>Name: {{ $item['name'] }}</p>
-			<p>Quantity: {{ $item['qty'] }}</p>
-			<p>Price: {{ $item['price'] }} Kč</p>
-			<p>Subtotal: {{ $item['subtotal'] }} Kč</p>
-			<p>{{ link_to_route('cart.remove', 'Remove from cart', $item['id']) }}</p>
-		</li>
-	@endforeach
-	</ul>
+	<div id="cart">
+	@include('cart')
+	</div>
 	
 	<h3>Products</h3>
 	<ul>
@@ -32,7 +22,7 @@
 				<p>{{ $product['member_price'] }} Kč</p>
 			@endif
 			<p>{{ $product['category']['name'] }}</p>
-			<p>{{ link_to_route('cart.add', 'Add to cart', $product['id']) }}</p>
+			<p><a href="#" data-id="{{ $product['id'] }}" role="add-to-cart">Add to cart</a></p>
 		</li>
 	@endforeach
 	</ul>
