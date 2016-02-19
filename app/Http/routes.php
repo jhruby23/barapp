@@ -28,7 +28,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('dashboard', 'PagesController@dashboard');
 	Route::get('logout', 'PagesController@logout');
-	Route::get('add-to-cart/{id}', ['uses' => 'PagesController@addToCart', 'as' => 'AddToCart']);
+	
+	Route::get('dashboard', 'DashboardController@showDashboard');
+	Route::get('add-to-cart/{id}', ['uses' => 'DashboardController@addToCart', 'as' => 'cart.add']);
+	Route::get('remove-from-cart/{id}', ['uses' => 'DashboardController@removeFromCart', 'as' => 'cart.remove']);
 });

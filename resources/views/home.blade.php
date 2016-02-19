@@ -1,10 +1,6 @@
 @extends('app')
 
-@section('content')
-	<div class="jumbotron">
-		<h1>NODE5 Bar app</h1>
-	</div>
-	
+@section('content')	
 	<div id="login-form">
 		{!! Form::open(['action' => 'PagesController@login']) !!}
 		

@@ -1,13 +1,10 @@
 @extends('app')
 
 @section('content')
-	<div class="jumbotron">
-		<h1>NODE5 Bar app</h1>
-	</div>
 	
 	<h2>Hi, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}!</h2>
 
-	{{ link_to_action('PagesController@logout', 'Log out') }}
+	{{ link_to_action('PagesController@logout', 'Cancel order') }}
 	
 	<h3>Shopping cart</h3>
 	<p>Total price: {{ $price }} Kč</p>
@@ -18,6 +15,7 @@
 			<p>Quantity: {{ $item['qty'] }}</p>
 			<p>Price: {{ $item['price'] }} Kč</p>
 			<p>Subtotal: {{ $item['subtotal'] }} Kč</p>
+			<p>{{ link_to_route('cart.remove', 'Remove from cart', $item['id']) }}</p>
 		</li>
 	@endforeach
 	</ul>
@@ -34,7 +32,7 @@
 				<p>{{ $product['member_price'] }} Kč</p>
 			@endif
 			<p>{{ $product['category']['name'] }}</p>
-			<p>{{ link_to_route('AddToCart', 'Add to cart', $product['id']) }}</p>
+			<p>{{ link_to_route('cart.add', 'Add to cart', $product['id']) }}</p>
 		</li>
 	@endforeach
 	</ul>
