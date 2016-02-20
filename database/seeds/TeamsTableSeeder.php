@@ -12,7 +12,7 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
-        Team::create(['name' => 'Testovací tým']);
+        Team::create(['name' => 'Test team']);
         Team::create(['name' => 'Node5 staff']);
     }
 }

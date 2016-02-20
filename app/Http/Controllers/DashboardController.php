@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -18,6 +18,18 @@ class DashboardController extends Controller
 		$this->updateCart();
 	}
 	
+	public function updateCart()
+	{
+		$this->items = Cart::content()->toArray();
+		$this->price = Cart::total();
+	}
+	
+	public function checkAJAX()
+	{
+		if(!Request::ajax())
+			return redirect('dashboard');
+	}
+	
    public function showDashboard()
 	{
 		//$cat = Category::with('products')->drinks()->get()->toArray();
@@ -29,15 +41,11 @@ class DashboardController extends Controller
 		
 		return view('dashboard', ['products' => $products, 'items' => $this->items, 'price' => $this->price]);
 	}
-	
-	public function updateCart()
-	{
-		$this->items = Cart::content()->toArray();
-		$this->price = Cart::total();
-	}
 
 	public function addToCart($id)
 	{
+		$this->checkAJAX();
+		
 		$product = Product::find($id)->toArray();
 		
 		if(is_null(Auth::user()->pin))
@@ -49,26 +57,39 @@ class DashboardController extends Controller
 		
 		$this->updateCart();
 		
-		return view('cart', ['items' => $this->items, 'price' => $this->price]);
+		return view('partials.cart', ['items' => $this->items, 'price' => $this->price]);
 	}
 	
 	public function removeFromCart($id)
 	{			
+		$this->checkAJAX();
+			
 		$rowid = Cart::search(['id' => $id])['0'];
 		
-		Cart::remove($rowid);
+		$count = Cart::get($rowid)->qty;
+
+		Cart::update($rowid, $count-1);	
 		
 		$this->updateCart();
 		
-		return view('cart', ['items' => $this->items, 'price' => $this->price]);
+		return view('partials.cart', ['items' => $this->items, 'price' => $this->price]);
 	}
 	
 	public function emptyCart()
 	{
+		$this->checkAJAX();
+			
 		Cart::destroy();	
 	
 		$this->updateCart();
 		
-		return view('cart', ['items' => $this->items, 'price' => $this->price]);
+		return view('partials.cart', ['items' => $this->items, 'price' => $this->price]);
+	}
+	
+	public function checkout()
+	{
+		$this->checkAJAX();
+			
+		return view('partials.checkout', ['items' => $this->items, 'price' => $this->price]);
 	}
 }

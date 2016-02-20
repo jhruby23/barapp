@@ -2,30 +2,40 @@ jQuery(document).ready(function($){
 	$('#cart').on('click', 'a#empty-cart',function(e){
 		e.preventDefault();
 		$.ajax({
-			url: '/empty-cart',
+			url: 'empty-cart',
 			type: 'GET',
-		}).done(function(result1){
-			$('#cart').html(result1);
+		}).done(function(result){
+			$('#cart').html(result);
 		});
 	});
 	
 	$('a[role*="add-to-cart"]').on('click', function(e){	
 		e.preventDefault();	
 		$.ajax({
-			url: '/add-to-cart/'+$(this).data('id'),
+			url: 'add-to-cart/'+$(this).data('id'),
 			type: 'GET',
-		}).done(function(result2){
-			$('#cart').html(result2);
+		}).done(function(result){
+			$('#cart').html(result);
 		});
 	});
 	
 	$('#cart').on('click', 'a[role*="remove-from-cart"]', function(e){	
 		e.preventDefault();	
 		$.ajax({
-			url: '/remove-from-cart/'+$(this).data('id'),
+			url: 'remove-from-cart/'+$(this).data('id'),
 			type: 'GET',
-		}).done(function(result3){
-			$('#cart').html(result3);
+		}).done(function(result){
+			$('#cart').html(result);
+		});
+	});
+	
+	$('#cart').on('click', 'a[role*="checkout"]', function(e){
+		e.preventDefault();
+		$.ajax({
+			url: 'checkout',
+			type: 'GET',
+		}).done(function(result){
+			$('#checkout').html(result);
 		});
 	});
 });

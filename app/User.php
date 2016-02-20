@@ -22,4 +22,9 @@ class User extends Authenticatable
     protected $hidden = [
         'remember_token',
     ];
+    
+    public function team()
+    {
+	    return $this->belongsTo('App\Team');
+    }
 }

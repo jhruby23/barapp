@@ -31,7 +31,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('logout', 'PagesController@logout');
 	
 	Route::get('dashboard', 'DashboardController@showDashboard');
-	Route::get('add-to-cart/{id}', ['uses' => 'DashboardController@addToCart', 'as' => 'cart.add']);
-	Route::get('remove-from-cart/{id}', ['uses' => 'DashboardController@removeFromCart', 'as' => 'cart.remove']);
-	Route::get('empty-cart', ['uses' => 'DashboardController@emptyCart', 'as' => 'cart.empty']);
+	Route::get('add-to-cart/{id}', 'DashboardController@addToCart');
+	Route::get('remove-from-cart/{id}', 'DashboardController@removeFromCart');
+	Route::get('empty-cart', 'DashboardController@emptyCart');
+	Route::get('checkout', 'DashboardController@checkout');
 });

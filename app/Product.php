@@ -17,7 +17,7 @@ class Product extends Model
     
     public function scopeEnabled($query)
     {
-	    $query->where('enabled', true);
+	    return $query->where('enabled', true);
     }
     
     public function category()
