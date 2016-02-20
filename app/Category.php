@@ -11,7 +11,7 @@ class Category extends Model
    public function products()
    {
 		return $this->hasMany('App\Product');
-   }
+	}
     
 	public function scopeFood($query)
    {
@@ -21,5 +21,13 @@ class Category extends Model
    public function scopeDrinks($query)
    {
 		return $query->where('type', 'drinks');
+   }
+   
+   public function scopeOther($query)
+   {
+	   return $query->where([
+	   	['type', '!=', 'food'],
+	   	['type', '!=', 'drinks']
+	   ]);
    }
 }

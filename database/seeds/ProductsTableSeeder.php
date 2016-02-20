@@ -31,5 +31,15 @@ class ProductsTableSeeder extends Seeder
     			'enabled' 		=> true,
     			'category_id' 	=> 14
     		]);
+    		
+    		Product::create([
+    			'name' 			=> 'Gift card',
+    			'description' 	=> 'Gift card for 1000 Kč',
+    			'quantity' 		=> 1000,
+    			'member_price' => 1000,
+    			'guest_price' 	=> 1000,
+    			'enabled' 		=> true,
+    			'category_id' 	=> 16
+    		]);
     }
 }

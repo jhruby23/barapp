@@ -29,5 +29,6 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => 'Snacks', 'type' => 'food']);
         Category::create(['name' => 'Other products', 'type' => 'food']);
         
+        Category::create(['name' => 'Gifts', 'type' => 'other']);
     }
 }

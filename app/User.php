@@ -12,6 +12,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+    	'first_name',
+    	'last_name',
+    	'email',
+    	'pin',
+    	'status',
+    	'rfid_nr',
+    	'rfid_hex',
+    	'team_id'
     ];
 
     /**
@@ -21,10 +29,16 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'remember_token',
+        'pin'
     ];
     
     public function team()
     {
 	    return $this->belongsTo('App\Team');
+    }
+    
+    public function orders()
+    {
+	    return $this->hasMany('App\Order');
     }
 }

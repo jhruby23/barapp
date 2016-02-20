@@ -34,14 +34,21 @@ class DashboardController extends Controller
 	
    public function showDashboard()
 	{
-		//$cat = Category::with('products')->drinks()->get()->toArray();
-		//$products_new = [];
+		$food = Product::with('category')->whereHas('category', function($q){
+			$q->food();
+		})->enabled()->get()->toArray();
 		
-		$products = Product::with('category')->enabled()->get()->toArray();
+		$drinks = Product::with('category')->whereHas('category', function($q){
+			$q->drinks();
+		})->enabled()->get()->toArray();
+		
+		$other = Product::with('category')->whereHas('category', function($q){
+			$q->other();
+		})->enabled()->get()->toArray();
 		
 		$this->updateCart();
 		
-		return view('dashboard', ['products' => $products, 'items' => $this->items, 'price' => $this->price]);
+		return view('dashboard', ['food' => $food, 'drinks' => $drinks, 'other' => $other, 'items' => $this->items, 'price' => $this->price]);
 	}
 
 	public function addToCart($id)
@@ -96,8 +103,11 @@ class DashboardController extends Controller
 	}
 	
 	public function makeOrder()
-	{		
+	{				
 		$this->checkAJAX();
+		
+		if(empty(Cart::content()->toArray()))
+			exit(1);
 		
 		$order = new Order;
 		$order->user_id = Auth::user()->id;

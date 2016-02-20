@@ -16,4 +16,19 @@ class Order extends Model
 	{
 		return $this->hasMany('App\OrderLine');
 	}
+	
+	public function buyer()
+	{
+		return $this->belongsTo('App\User');
+	}
+	
+	public function unpaid($query)
+	{
+		return $query->where('invoice_nr', '');
+	}
+	
+	public function paid($query)
+	{
+		return $query->where('inovice_nr', '!=', '');
+	}
 }

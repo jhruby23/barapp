@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'make-order',
 			type: 'GET',
-		}).done(function(result){
+		}).success(function(result){
 			alert('Order completed!');
 			window.location.href = '/';
 		});

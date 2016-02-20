@@ -1,4 +1,4 @@
-	<h3>Shopping cart</h3>
+	<h2>Shopping cart</h2>
 	<p>Total price: {{ $price }} Kč</p>
 	<p><a href="#" id="empty-cart">Empty cart</a></p>
 	<ul>

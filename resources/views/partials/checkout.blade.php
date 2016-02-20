@@ -1,4 +1,4 @@
-	<h3>Checkout</h3>
+	<h2>Checkout</h2>
 	<p>Total price: {{ $price }} Kč</p>
 	<ul>
 	@foreach($items as $item)

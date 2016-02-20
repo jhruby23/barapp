@@ -6,7 +6,7 @@
 		
 		<h2>Member login</h2>
 			<div class="form-group">
-			{!! Form::text('pin', '', ['class' => 'form-control']) !!}
+			{!! Form::password('pin', ['class' => 'form-control']) !!}
 			</div>
 	
 			{!! Form::submit('Login', ['class' => 'btn btn-default', 'name' => 'member']) !!}
