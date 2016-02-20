@@ -35,4 +35,5 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('remove-from-cart/{id}', 'DashboardController@removeFromCart');
 	Route::get('empty-cart', 'DashboardController@emptyCart');
 	Route::get('checkout', 'DashboardController@checkout');
+	Route::get('make-order', 'DashboardController@makeOrder');
 });

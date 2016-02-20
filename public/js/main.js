@@ -38,4 +38,15 @@ jQuery(document).ready(function($){
 			$('#checkout').html(result);
 		});
 	});
+	
+	$('#checkout').on('click', 'a[role*=make-order]', function(e){
+		e.preventDefault();
+		$.ajax({
+			url: 'make-order',
+			type: 'GET',
+		}).done(function(result){
+			alert('Order completed!');
+			window.location.href = '/';
+		});
+	});
 });

@@ -6,3 +6,6 @@
 		</li>
 	@endforeach
 	</ul>
+	
+	<p><a href="#" role="cancel-checkout">Cancel</a></p>
+	<p><a href="#" role="make-order">Make order</a></p>

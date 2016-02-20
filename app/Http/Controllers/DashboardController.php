@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
+use App\Order;
+use App\OrderLine;
 use Cart;
 use Auth;
 
@@ -91,5 +93,28 @@ class DashboardController extends Controller
 		$this->checkAJAX();
 			
 		return view('partials.checkout', ['items' => $this->items, 'price' => $this->price]);
+	}
+	
+	public function makeOrder()
+	{		
+		$this->checkAJAX();
+		
+		$order = new Order;
+		$order->user_id = Auth::user()->id;
+		$order->total_price = $this->price;
+		$order->save();
+		
+		foreach(Cart::content() as $item){
+			$line = new OrderLine;
+			$line->product_id = $item->id;
+			$line->quantity = $item->qty;
+			$line->subtotal_price = $item->subtotal;
+			$line->order()->associate($order);
+			$line->save();
+		}
+		
+		Cart::destroy();
+		
+		Auth::logout();	
 	}
 }
