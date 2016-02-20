@@ -2,6 +2,12 @@
 
 @section('content')
 	
+	<div class="jumbotron">
+		<div class="container">
+			<h1>NODE5 Bar app</h1>
+		</div>
+	</div>
+	
 	<h2>Hi, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} from {{ Auth::user()->team->name }}!</h2>
 	{{ link_to_action('PagesController@logout', 'Cancel order') }}
 	
@@ -16,8 +22,13 @@
 	<div id="products">
 		<h2>Products</h2>
 		
-		<h3>Food</h3>
-		<ul>
+		<ul class="nav nav-pills nav-justified">
+			<li class="active"><a href="#food">Food</a></li>
+			<li><a href="#drinks">Drinks</a></li>
+			<li><a href="#other">Other</a></li>
+		</ul>
+		
+		<ul id="food" class="offer">
 		@foreach($food as $product)
 			<li>
 				<p>{{ $product['name'] }}</p>
@@ -33,8 +44,7 @@
 		@endforeach
 		</ul>
 		
-		<h3>Drinks</h3>
-		<ul>
+		<ul id="drinks" class="offer" style="display: none;">
 		@foreach($drinks as $product)
 			<li>
 				<p>{{ $product['name'] }}</p>
@@ -50,8 +60,7 @@
 		@endforeach
 		</ul>
 		
-		<h3>Other</h3>
-		<ul>
+		<ul id="other" class="offer" style="display: none;">
 		@foreach($other as $product)
 			<li>
 				<p>{{ $product['name'] }}</p>

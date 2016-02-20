@@ -44,9 +44,23 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'make-order',
 			type: 'GET',
-		}).success(function(result){
+		}).done(function(result){
 			alert('Order completed!');
 			window.location.href = '/';
 		});
+	});
+	
+	$('.nav a[href*="#"]').click(function(e){
+		e.preventDefault();
+		$el = $(this).attr('href');
+		$('.offer').hide();
+		$($el).show();
+		$(this).parent().siblings('li').removeClass('active');
+		$(this).parent().addClass('active');
+	});
+	
+	$('a#guest').click(function(e){
+		e.preventDefault();
+		$('input[name="guest"]').click();
 	});
 });

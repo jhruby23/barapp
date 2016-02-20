@@ -1,0 +1,95 @@
+$thin: 100;
+$light: 200;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$bolder: 800;
+
+@mixin font-face($font-family, $font-weight, $file-path){
+	@font-face {
+		font-weight: $font-weight;
+		font-style: normal;
+		font-family: $font-family;
+		src: url('#{$file-path}.eot');
+		src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+      	url('#{$file-path}.woff2') format('woff2'),
+			url('#{$file-path}.woff') format('woff'),
+			url('#{$file-path}.ttf') format('truetype'),
+			url('#{$file-path}.svg##{$font-family}') format('svg');
+	}
+}
+
+@mixin font($type: '') {
+	@if ($type == 'serif') {
+		font-family: $font-serif, serif;
+	} @else {
+		font-family: $font-sans-serif, sans-serif;
+	}
+}
+
+@mixin transition($val){
+	-webkit-transition: $val;
+	-moz-transition: $val;
+	-ms-transition: $val;
+	-o-transition: $val;
+	transition: $val;
+}
+
+@mixin linear-gradient($val){
+	background: -webkit-linear-gradient($val);
+	background: -moz-linear-gradient($val);
+	background: -ms-linear-gradient($val);
+	background: -o-linear-gradient($val);
+	background: linear-gradient($val);
+}
+
+@mixin hwAcc() {
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+@mixin flexbox($orientation: ''){
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	
+	@if ($orientation == 'column' or $orientation == 'col') {
+		-webkit-flex-direction: column;
+		-moz-flex-direction: column;
+		flex-direction: column;
+	} @else {
+		-webkit-flex-direction: row;
+		-moz-flex-direction: row;
+		flex-direction: row;
+	}
+}
+
+@mixin flex($values){
+	-webkit-box-flex: $values;
+	-moz-box-flex: $values;
+	-webkit-flex: $values;
+	-ms-flex: $values;
+	flex: $values;
+}
+
+body {
+	-webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -ms-backface-visibility: hidden;
+   backface-visibility: hidden;
+   overflow-x: hidden;
+   box-sizing: border-box;
+}

@@ -1,0 +1,42 @@
+$pc-big: 1440px !default;
+$pc-small: 1280px !default;
+$ipad-land: 1024px !default;
+$ipad-port: 768px !default;
+$mob-big: 568px !default;
+$mob-small: 320px !default;
+
+@mixin pc-big() {
+	@media screen and (min-width: $pc-big) {
+		@content;
+	}
+}
+
+@mixin pc-small() {
+	@media screen and (max-width: $pc-small) {
+		@content;
+	}
+}
+
+@mixin ipad-land() {
+	@media screen and (max-width: $ipad-land) {
+		@content;
+	}
+}
+
+@mixin ipad-port() {
+	@media screen and (max-width: $ipad-port) {
+		@content;
+	}
+}
+
+@mixin mob-big() {
+	@media screen and (max-width: $mob-big) {
+		@content;
+	}
+}
+
+@mixin mob-small() {
+	@media screen and (max-width: $mob-small) {
+		@content;
+	}
+}
