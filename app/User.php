@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
 	    return $this->hasMany('App\Order');
     }
+    
+    public function isGuest()
+    {
+	    return is_null($this->pin);
+    }
 }

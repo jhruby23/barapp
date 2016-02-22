@@ -25,6 +25,8 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'PagesController@showHome');
 	Route::post('/', 'PagesController@login');
+	
+	Route::get('admin', 'AdminController@show');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

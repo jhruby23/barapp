@@ -10,6 +10,7 @@ use App\Product;
 use App\Category;
 use App\Order;
 use App\OrderLine;
+use App\User;
 use Cart;
 use Auth;
 

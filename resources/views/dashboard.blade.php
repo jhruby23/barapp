@@ -65,7 +65,7 @@
 			<li>
 				<p>{{ $product['name'] }}</p>
 				<p>{{ $product['description'] }}</p>
-				@if(is_null(Auth::user()->pin))
+				@if(Auth::user()->isGuest())
 					<p>{{ $product['guest_price'] }} Kč</p>
 				@else
 					<p>{{ $product['member_price'] }} Kč</p>
@@ -83,6 +83,7 @@
 		@include('partials.checkout')
 	</div>
 	
+	@if(!Auth::user()->isGuest())
 	<hr>
 
 	<div id="orders">
@@ -103,4 +104,6 @@
 		</ul>
 		@endif
 	</div>
+	@endif
+	
 @endsection
