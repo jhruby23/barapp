@@ -14,5 +14,6 @@ class CustomersTableSeeder extends Seeder
     {
         Customer::create(['name' => 'NODE5']);
         Customer::create(['name' => 'Test customer']);
+        Customer::create(['name' => 'EasyCore']);
     }
 }
