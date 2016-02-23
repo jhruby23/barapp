@@ -13,6 +13,6 @@ class TeamsTableSeeder extends Seeder
     public function run()
     {
         Team::create(['name' => 'Test team']);
-        Team::create(['name' => 'Node5 staff']);
+        Team::create(['name' => 'NODE5 staff']);
     }
 }

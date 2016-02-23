@@ -14,7 +14,7 @@ class Order extends Model
 	
 	public function items()
 	{
-		return $this->hasMany('App\OrderLine');
+		return $this->hasMany('App\OrderItem');
 	}
 	
 	public function buyer()

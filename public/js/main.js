@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
 		});
 	});
 	
-	$('a[role*="add-to-cart"]').on('click', function(e){	
+	$('body').on('click', 'a[role*="add-to-cart"]', function(e){	
 		e.preventDefault();	
 		$.ajax({
 			url: 'add-to-cart/'+$(this).data('id'),
@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
 		});
 	});
 	
-	$('#checkout').on('click', 'a[role*=make-order]', function(e){
+	$('#checkout').on('click', 'a[role*="make-order"]', function(e){
 		e.preventDefault();
 		$.ajax({
 			url: 'make-order',
@@ -47,6 +47,16 @@ jQuery(document).ready(function($){
 		}).done(function(result){
 			alert('Order completed!');
 			window.location.href = '/';
+		});
+	});
+	
+	$('#orders').on('click', 'a[role*="refund"]', function(e){
+		e.preventDefault();
+		$.ajax({
+			url: 'refund/'+$(this).data('id'),
+			type: 'GET',
+		}).done(function(result){
+			$('#orders').html(result);
 		});
 	});
 	

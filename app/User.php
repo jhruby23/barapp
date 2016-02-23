@@ -37,6 +37,11 @@ class User extends Authenticatable
 	    return $this->belongsTo('App\Team');
     }
     
+    public function customer()
+    {
+	    return $this->belongsTo('App\Customer');
+    }
+    
     public function orders()
     {
 	    return $this->hasMany('App\Order');
@@ -45,5 +50,10 @@ class User extends Authenticatable
     public function isGuest()
     {
 	    return is_null($this->pin);
+    }
+    
+    public function isAdmin()
+    {
+	    return $this->is_admin;
     }
 }

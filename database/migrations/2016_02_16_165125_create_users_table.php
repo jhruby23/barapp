@@ -17,15 +17,18 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique()->nullable();
-            $table->integer('pin')->unique()->nullable();
+            $table->char('pin', 4)->unique()->nullable();
             $table->string('status');
+            $table->boolean('is_admin')->default(false);
             $table->integer('rfid_nr')->unique()->nullable();
             $table->string('rfid_hex')->unique()->nullable();
-            $table->integer('team_id')->unsigned();
+            $table->integer('team_id')->unsigned()->nullable();
+            $table->integer('customer_id')->unsigned()->nullable();
             $table->string('remember_token');
             $table->timestamps();
             
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

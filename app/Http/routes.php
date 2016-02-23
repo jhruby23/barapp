@@ -25,8 +25,6 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'PagesController@showHome');
 	Route::post('/', 'PagesController@login');
-	
-	Route::get('admin', 'AdminController@show');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
@@ -38,4 +36,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('empty-cart', 'DashboardController@emptyCart');
 	Route::get('checkout', 'DashboardController@checkout');
 	Route::get('make-order', 'DashboardController@makeOrder');
+	Route::get('refund/{id}', 'DashboardController@refund');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'admin']], function() {
+	Route::get('admin', 'AdminController@show');
 });

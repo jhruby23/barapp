@@ -17,15 +17,27 @@ class UsersTableSeeder extends Seeder
         		'last_name' => 'Guest',
         		'pin' => NULL,
         		'status' => 'active',
-        		'team_id' => 1
+        		'team_id' => 1,
+        		'customer_id' => 1
         ]);
         
        User::create([
        		'first_name' => 'Pan',
         		'last_name' => 'Test',
-        		'pin' => 1234,
+        		'pin' => '1234',
         		'status' => 'active',
-        		'team_id' => 1
+        		'team_id' => 2,
+        		'customer_id' => 2
+        ]);
+        
+        User::create([
+       		'first_name' => 'Big',
+        		'last_name' => 'Admin',
+        		'pin' => '0000',
+        		'status' => 'active',
+        		'team_id' => 2,
+        		'customer_id' => 2,
+        		'is_admin' => true
         ]);
     }
 }

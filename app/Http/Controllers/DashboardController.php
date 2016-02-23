@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
 use App\Order;
-use App\OrderLine;
+use App\OrderItem;
 use App\User;
 use Cart;
 use Auth;
@@ -34,18 +34,18 @@ class DashboardController extends Controller
 	}
 	
    public function showDashboard()
-	{
+	{		
 		$food = Product::with('category')->whereHas('category', function($q){
 			$q->food();
-		})->enabled()->get()->toArray();
+		})->enabled()->get();
 		
 		$drinks = Product::with('category')->whereHas('category', function($q){
 			$q->drinks();
-		})->enabled()->get()->toArray();
+		})->enabled()->get();
 		
 		$other = Product::with('category')->whereHas('category', function($q){
 			$q->other();
-		})->enabled()->get()->toArray();
+		})->enabled()->get();
 		
 		$this->updateCart();
 		
@@ -56,14 +56,14 @@ class DashboardController extends Controller
 	{
 		$this->checkAJAX();
 		
-		$product = Product::find($id)->toArray();
+		$product = Product::enabled()->find($id);
 		
 		if(is_null(Auth::user()->pin))
-			$price = $product['guest_price'];
+			$price = $product->guest_price;
 		else
-			$price = $product['member_price'];
+			$price = $product->member_price;
 		
-		Cart::add($id, $product['name'], 1, $price);
+		Cart::add($id, $product->name, 1, $price);
 		
 		$this->updateCart();
 		
@@ -116,7 +116,7 @@ class DashboardController extends Controller
 		$order->save();
 		
 		foreach(Cart::content() as $item){
-			$line = new OrderLine;
+			$line = new OrderItem;
 			$line->product_id = $item->id;
 			$line->quantity = $item->qty;
 			$line->subtotal_price = $item->subtotal;
@@ -127,5 +127,16 @@ class DashboardController extends Controller
 		Cart::destroy();
 		
 		Auth::logout();	
+	}
+	
+	public function refund($id)
+	{		
+		$this->checkAJAX();
+		
+		$order = Order::where('user_id', Auth::user()->id)->find($id);
+		$order->items()->delete();
+		$order->delete();
+		
+		return view('partials.orders');
 	}
 }
