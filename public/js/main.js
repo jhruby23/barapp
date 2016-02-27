@@ -1,9 +1,12 @@
 jQuery(document).ready(function($){
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
 	$('#cart').on('click', 'a#empty-cart',function(e){
 		e.preventDefault();
 		$.ajax({
 			url: 'empty-cart',
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -13,7 +16,8 @@ jQuery(document).ready(function($){
 		e.preventDefault();	
 		$.ajax({
 			url: 'add-to-cart/'+$(this).data('id'),
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -23,7 +27,8 @@ jQuery(document).ready(function($){
 		e.preventDefault();	
 		$.ajax({
 			url: 'remove-from-cart/'+$(this).data('id'),
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -33,7 +38,8 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		$.ajax({
 			url: 'checkout',
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#checkout').html(result);
 		});
@@ -43,7 +49,8 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		$.ajax({
 			url: 'make-order',
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			alert('Order completed!');
 			window.location.href = '/';
@@ -54,7 +61,8 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		$.ajax({
 			url: 'refund/'+$(this).data('id'),
-			type: 'GET',
+			type: 'POST',
+			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#orders').html(result);
 		});

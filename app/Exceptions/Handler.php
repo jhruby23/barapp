@@ -45,6 +45,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+    	if ($e instanceof ModelNotFoundException) {
+			$e = new NotFoundHttpException($e->getMessage(), $e);
+		}
+
+		if ($e instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+      	return abort('404');
+		}
+      
+      return parent::render($request, $e);
     }
 }

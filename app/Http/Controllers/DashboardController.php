@@ -49,7 +49,7 @@ class DashboardController extends Controller
 		
 		$this->updateCart();
 		
-		return view('dashboard', ['food' => $food, 'drinks' => $drinks, 'other' => $other, 'items' => $this->items, 'price' => $this->price]);
+		return view('dashboard', ['food' => $food, 'drinks' => $drinks, 'other' => $other, 'items' => $this->items, 'price' => $this->price, 'orders' => Auth::user()->orders]);
 	}
 
 	public function addToCart($id)
@@ -137,6 +137,6 @@ class DashboardController extends Controller
 		$order->items()->delete();
 		$order->delete();
 		
-		return view('partials.orders');
+		return view('partials.orders', ['orders' => Auth::user()->orders]);
 	}
 }

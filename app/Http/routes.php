@@ -31,12 +31,12 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('logout', 'PagesController@logout');
 	
 	Route::get('dashboard', 'DashboardController@showDashboard');
-	Route::get('add-to-cart/{id}', 'DashboardController@addToCart');
-	Route::get('remove-from-cart/{id}', 'DashboardController@removeFromCart');
-	Route::get('empty-cart', 'DashboardController@emptyCart');
-	Route::get('checkout', 'DashboardController@checkout');
-	Route::get('make-order', 'DashboardController@makeOrder');
-	Route::get('refund/{id}', 'DashboardController@refund');
+	Route::post('add-to-cart/{id}', 'DashboardController@addToCart');
+	Route::post('remove-from-cart/{id}', 'DashboardController@removeFromCart');
+	Route::post('empty-cart', 'DashboardController@emptyCart');
+	Route::post('checkout', 'DashboardController@checkout');
+	Route::post('make-order', 'DashboardController@makeOrder');
+	Route::post('refund/{id}', 'DashboardController@refund');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function() {
