@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->char('pin', 4)->unique()->nullable();
             $table->string('status');
             $table->boolean('is_admin')->default(false);
+            $table->boolean('dynamic_sort')->default(false);
             $table->integer('rfid_nr')->unique()->nullable();
             $table->string('rfid_hex')->unique()->nullable();
             $table->integer('team_id')->unsigned()->nullable();

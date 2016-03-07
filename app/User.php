@@ -19,7 +19,8 @@ class User extends Authenticatable
     	'status',
     	'rfid_nr',
     	'rfid_hex',
-    	'team_id'
+    	'team_id',
+    	'dynamic_sort'
     ];
 
     /**

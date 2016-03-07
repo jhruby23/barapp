@@ -1,12 +1,13 @@
 jQuery(document).ready(function($){
-	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
+	$.ajaxSetup({
+		headers: { 'X-CSRF-Token' : $('meta[name="csrf-token"]').attr('content') }
+	});
+	
 	$('#cart').on('click', 'a#empty-cart',function(e){
 		e.preventDefault();
 		$.ajax({
 			url: 'empty-cart',
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -17,7 +18,6 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'add-to-cart/'+$(this).data('id'),
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -28,7 +28,6 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'remove-from-cart/'+$(this).data('id'),
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#cart').html(result);
 		});
@@ -39,7 +38,6 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'checkout',
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#checkout').html(result);
 		});
@@ -50,7 +48,6 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'make-order',
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			alert('Order completed!');
 			window.location.href = '/';
@@ -62,7 +59,6 @@ jQuery(document).ready(function($){
 		$.ajax({
 			url: 'refund/'+$(this).data('id'),
 			type: 'POST',
-			data: {_token: CSRF_TOKEN},
 		}).done(function(result){
 			$('#orders').html(result);
 		});
@@ -75,6 +71,18 @@ jQuery(document).ready(function($){
 		$($el).show();
 		$(this).parent().siblings('li').removeClass('active');
 		$(this).parent().addClass('active');
+	});
+	
+	$('#preferences').on('click', '#user-update', function(e){
+		e.preventDefault();
+		$.ajax({
+			url: $(this).parent('form').attr('action'),
+			type: 'PATCH',
+			data: $(this).parent('form').serialize(),
+		}).done(function(result){
+			if(result == 'success')
+				$('#update-success').show();
+		});
 	});
 	
 	$('a#guest').click(function(e){

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -47,4 +47,12 @@ class PagesController extends Controller
 		
 		return redirect('/');
 	}	
+	
+	public function updateUser()
+	{
+		if(User::findOrFail(Auth::user()->id)->update(Request::all()))
+			echo 'success';
+		else
+			echo 'error';
+	}
 }

@@ -93,6 +93,14 @@
 	<div id="orders">
 		@include('partials.orders')
 	</div>
+	
+	<hr>
+	
+	<div id="preferences">
+		@include('partials.preferences')
+	</div>
 	@endif
+	
+	<div style="width: 100%; height: 50px;"></div>
 	
 @endsection

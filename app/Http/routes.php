@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('logout', 'PagesController@logout');
+	Route::patch('dashboard', ['uses' => 'PagesController@updateUser', 'as' => 'user.update']);
 	
 	Route::get('dashboard', 'DashboardController@showDashboard');
 	Route::post('add-to-cart/{id}', 'DashboardController@addToCart');
