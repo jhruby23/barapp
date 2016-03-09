@@ -29,6 +29,7 @@
 		</div>
 	
 		<p id="update-success" style="display: none;">Your profile has been successfully updated!</p>
+		<p id="update-error" style="display: none;">An error occurred!</p>
 		{!! Form::submit('Update profile', ['class' => 'btn btn-primary', 'id' => 'user-update']) !!}
 		
 	{!! Form::close() !!}

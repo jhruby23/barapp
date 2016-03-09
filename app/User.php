@@ -57,4 +57,12 @@ class User extends Authenticatable
     {
 	    return $this->is_admin;
     }
+    
+    public function setEmailAttribute($value)
+    {
+	    if($value == '')
+	    	$this->attributes['email'] = NULL;
+	    else
+	    	$this->attributes['email'] = $value;
+    }
 }

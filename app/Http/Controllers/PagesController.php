@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use App\Product;
 use Cart;
+use App\Http\Requests\UserUpdateRequest;
 
 class PagesController extends Controller
 {
@@ -21,11 +22,11 @@ class PagesController extends Controller
 	public function login(Request $request)
 	{
 		//member login
-		if($request->has('member'))
-			$pin = $request->input('pin');
+		if(Request::has('member'))
+			$pin = Request::input('pin');
 			   
 		//guest login
-		else if($request->has('guest'))
+		else if(Request::has('guest'))
 			$pin = NULL;
 			
 		$user = User::where('pin', $pin)->first();
@@ -48,11 +49,8 @@ class PagesController extends Controller
 		return redirect('/');
 	}	
 	
-	public function updateUser()
+	public function updateUser(UserUpdateRequest $request)
 	{
-		if(User::findOrFail(Auth::user()->id)->update(Request::all()))
-			echo 'success';
-		else
-			echo 'error';
+		User::findOrFail(Auth::user()->id)->update($request->all());
 	}
 }

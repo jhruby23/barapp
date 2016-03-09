@@ -79,9 +79,12 @@ jQuery(document).ready(function($){
 			url: $(this).parent('form').attr('action'),
 			type: 'PATCH',
 			data: $(this).parent('form').serialize(),
-		}).done(function(result){
-			if(result == 'success')
-				$('#update-success').show();
+		}).success(function(result){
+			$('#update-error').hide();
+			$('#update-success').show();
+		}).error(function(result){
+			$('#update-success').hide();
+			$('#update-error').show();
 		});
 	});
 	
