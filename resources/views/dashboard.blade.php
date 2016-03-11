@@ -9,7 +9,7 @@
 	</div>
 	
 	<h2>Hi, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} from {{ Auth::user()->team->name }}!</h2>
-	<p>{{ link_to_action('PagesController@logout', 'Cancel order') }}</p>
+	<p>{{ link_to_route('logout', 'Cancel order') }}</p>
 	
 	@if(Auth::user()->isAdmin())
 	<p><a href="admin">Go to admin panel</a></p>

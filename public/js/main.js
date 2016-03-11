@@ -92,4 +92,27 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		$('input[name="guest"]').click();
 	});
+	
+	$i = -1;
+	$('button#add-category').click(function(e){
+		e.preventDefault();
+		$new = $('div.category-edit').last().clone(true).appendTo('form .editboxes');
+		$new.find('button span.val').text('');
+		$new.find('input[type="text"]').val('');
+		$new.find('input[type="hidden"]').val('');
+		$new.find('input[type="text"]').attr('name', $i+'[name]');
+		$new.find('input[type="hidden"]').attr('name', $i+'[type]');
+		$i--;
+	});
+	
+	$('ul.category-select li').on('click', 'a', function(e){
+		e.preventDefault();
+		$val = $(this).data('type');
+		$ul = $(this).parent('li').parent('ul');
+		$ul.siblings('button').children('span.val').text($val);
+		$ul.parent('div').siblings('input[type="hidden"]').val($val);
+		
+		if($val == 'remove')
+			$ul.parent('div').parent('div').parent('div').hide();
+	});
 });

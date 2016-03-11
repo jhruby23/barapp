@@ -28,10 +28,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('logout', 'PagesController@logout');
+	Route::get('logout', ['uses' => 'PagesController@logout', 'as' => 'logout']);
 	Route::patch('dashboard', ['uses' => 'PagesController@updateUser', 'as' => 'user.update']);
 	
-	Route::get('dashboard', 'DashboardController@showDashboard');
+	Route::get('dashboard', ['uses' => 'DashboardController@showDashboard', 'as' => 'dashboard.index']);
 	Route::post('add-to-cart/{id}', 'DashboardController@addToCart');
 	Route::post('remove-from-cart/{id}', 'DashboardController@removeFromCart');
 	Route::post('empty-cart', 'DashboardController@emptyCart');
@@ -42,4 +42,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function() {
 	Route::get('admin', 'AdminController@show');
+	
+	Route::get('categories', ['uses' => 'AdminController@showCategories', 'as' => 'categories.index']);
+	Route::post('categories', ['uses' => 'AdminController@updateCategories', 'as' => 'categories.update']);
 });

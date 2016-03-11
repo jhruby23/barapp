@@ -8,6 +8,8 @@ class Category extends Model
 {
 	public $timestamps = false;
 	
+	public $fillable = ['name', 'type'];
+	
    public function products()
    {
 		return $this->hasMany('App\Product');
