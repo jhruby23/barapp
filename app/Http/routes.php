@@ -45,4 +45,6 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function() {
 	
 	Route::get('categories', ['uses' => 'AdminController@showCategories', 'as' => 'categories.index']);
 	Route::post('categories', ['uses' => 'AdminController@updateCategories', 'as' => 'categories.update']);
+	Route::get('products', ['uses' => 'AdminController@showProducts', 'as' => 'products.index']);
+	Route::post('products', ['uses' => 'AdminController@updateProducts', 'as' => 'products.update']);
 });

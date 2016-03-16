@@ -26,12 +26,12 @@
 					<div class="input-group-btn">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="val" style="text-transform: capitalize;">{{ $cat->type }}</span> <span class="caret"></span></button>
 						<ul class="category-select dropdown-menu dropdown-menu-right">
-							<li><a href="#" data-type="food">Food</a></li>
-							<li><a href="#" data-type="drinks">Drinks</a></li>
-							<li><a href="#" data-type="other">Other</a></li>
+							<li><a href="#" data-name="food" data-id="food">Food</a></li>
+							<li><a href="#" data-name="drinks" data-id="drinks">Drinks</a></li>
+							<li><a href="#" data-name="other" data-id="other">Other</a></li>
 						
 							<li role="separator" class="divider"></li>
-							<li><a href="#" data-type="remove">Remove category</a></li>
+							<li><a href="#" data-name="remove" data-id="remove">Remove category</a></li>
 						
 						</ul>
 					</div>

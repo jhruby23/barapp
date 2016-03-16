@@ -16,6 +16,7 @@
 	<hr>
 
 	<h2>Actions</h2>
-	<p>{{ link_to_route('categories.index', 'Categories') }}</p>
+	<p>{{ link_to_route('categories.index', 'Manage categories') }}</p>
+	<p>{{ link_to_route('products.index', 'Manage products') }}</p>
 
 @endsection

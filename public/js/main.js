@@ -105,12 +105,13 @@ jQuery(document).ready(function($){
 		$i--;
 	});
 	
-	$('ul.category-select li').on('click', 'a', function(e){
+	$('ul.dropdown-menu li').on('click', 'a', function(e){
 		e.preventDefault();
-		$val = $(this).data('type');
+		$name = $(this).data('name');
+		$id = $(this).data('id');
 		$ul = $(this).parent('li').parent('ul');
-		$ul.siblings('button').children('span.val').text($val);
-		$ul.parent('div').siblings('input[type="hidden"]').val($val);
+		$ul.siblings('button').children('span.val').text($name);
+		$ul.parent('div').siblings('input[type="hidden"]').val($id);
 		
 		if($val == 'remove')
 			$ul.parent('div').parent('div').parent('div').hide();
