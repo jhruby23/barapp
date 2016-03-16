@@ -13,16 +13,22 @@ class AccountController extends Controller
 {
 	public function showOrders()
 	{
-		$orders = Auth::user()->orders;
+		$orders = Auth::user()->unpaidOrders;
 	
 		return view('account.orders', compact('orders'));	
 	}
 	
 	public function showGroup()
 	{
-		$group = User::where('customer_id', Auth::user()->customer->id)->whereNotIn('id', [Auth::id()])->get()->toArray();
+		$group = User::with('unpaidOrders')->where('customer_id', Auth::user()->customer->id)->get();
 		
-		echo '<pre>';
-		print_r($group);
+		$spendings = $group->sum(function($user){
+			$sum = 0;
+			foreach($user->unpaidOrders as $order)
+				$sum += $order->total_price;
+			return $sum;
+		});
+		
+		return view('account.group', compact('group', 'spendings'));
 	}
 }

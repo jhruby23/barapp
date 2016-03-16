@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content') 
-	<h2>Hi, {{ Auth::user()->first_name }}!
+	<h2>Hi {{ Auth::user()->first_name }}!
 	
 	@if(Auth::user()->isMember())
 		Your current spendings: {{ $spendings }} Kč

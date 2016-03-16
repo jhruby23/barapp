@@ -1,7 +1,7 @@
 @extends('account.master')
 
 @section('heading')
-	<h2>Hi, {{ Auth::user()->first_name }}, these are your orders for {{ \Carbon\Carbon::now()->format('m/Y') }} </h2>
+	<h2>Hi {{ Auth::user()->first_name }}, these are your orders for {{ \Carbon\Carbon::now()->format('m/Y') }} </h2>
 @endsection
 
 @section('data')

@@ -48,6 +48,11 @@ class User extends Authenticatable
 	    return $this->hasMany(Order::class);
     }
     
+    public function unpaidOrders()
+    {
+	    return $this->hasMany(Order::class)->where('invoice_nr', NULL);
+    }
+    
     public function isGuest()
     {
 	    return is_null($this->pin);
@@ -61,6 +66,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
 	    return $this->is_admin;
+    }
+    
+    public function scopeActive($query)
+    {
+	    return $query->where('status', 'active');
     }
     
     public function setEmailAttribute($value)

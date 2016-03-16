@@ -29,7 +29,7 @@ class PagesController extends Controller
 		else if(Request::has('guest'))
 			$pin = NULL;
 			
-		$user = User::where('pin', $pin)->first();
+		$user = User::where('pin', $pin)->active()->first();
 	
 		//no user with this pin found
 		if(!$user)
