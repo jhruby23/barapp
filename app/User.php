@@ -35,22 +35,27 @@ class User extends Authenticatable
     
     public function team()
     {
-	    return $this->belongsTo('App\Team');
+	    return $this->belongsTo(Team::class);
     }
     
     public function customer()
     {
-	    return $this->belongsTo('App\Customer');
+	    return $this->belongsTo(Customer::class);
     }
     
     public function orders()
     {
-	    return $this->hasMany('App\Order');
+	    return $this->hasMany(Order::class);
     }
     
     public function isGuest()
     {
 	    return is_null($this->pin);
+    }
+    
+    public function isMember()
+    {
+	    return !is_null($this->pin);
     }
     
     public function isAdmin()

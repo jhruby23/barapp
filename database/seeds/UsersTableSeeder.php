@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
        User::create([
-       		'first_name' => '',
-        		'last_name' => 'Guest',
+       		'first_name' => 'Guest',
+        		'last_name' => '',
         		'pin' => NULL,
         		'status' => 'active',
         		'team_id' => 1,
@@ -22,8 +22,8 @@ class UsersTableSeeder extends Seeder
         ]);
         
        User::create([
-       		'first_name' => 'Pan',
-        		'last_name' => 'Test',
+       		'first_name' => 'John',
+        		'last_name' => 'Doe',
         		'pin' => '1234',
         		'status' => 'active',
         		'team_id' => 2,
@@ -31,13 +31,21 @@ class UsersTableSeeder extends Seeder
         ]);
         
         User::create([
-       		'first_name' => 'Big',
-        		'last_name' => 'Admin',
+       		'first_name' => 'Test',
+        		'last_name' => 'User',
         		'pin' => '0000',
         		'status' => 'active',
         		'team_id' => 2,
-        		'customer_id' => 2,
-        		'is_admin' => true
+        		'customer_id' => 2
+        ]);
+        
+        User::create([
+       		'first_name' => 'Banned',
+        		'last_name' => 'User',
+        		'pin' => '5555',
+        		'status' => 'inactive',
+        		'team_id' => 1,
+        		'customer_id' => 1
         ]);
     }
 }

@@ -49,7 +49,11 @@ class DashboardController extends Controller
 		
 		$this->updateCart();
 		
-		return view('dashboard', ['food' => $food, 'drinks' => $drinks, 'other' => $other, 'items' => $this->items, 'price' => $this->price, 'orders' => Auth::user()->orders]);
+		$orders = Auth::user()->orders;
+		
+		$spendings = $orders->where('invoice_nr', NULL)->sum('total_price');
+		
+		return view('dashboard', ['food' => $food, 'drinks' => $drinks, 'other' => $other, 'items' => $this->items, 'price' => $this->price, 'orders' => $orders, 'spendings' => $spendings]);
 	}
 
 	public function addToCart($id)

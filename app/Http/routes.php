@@ -40,6 +40,12 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::post('refund/{id}', 'DashboardController@refund');
 });
 
+Route::group(['middleware' => ['web', 'auth', 'member']], function() {
+	Route::get('account/orders', ['uses' => 'AccountController@showOrders', 'as' => 'account.orders']);
+	Route::get('account/group', ['uses' => 'AccountController@showGroup', 'as' => 'account.group']);
+	Route::get('account/invoices', ['uses' => 'AccountController@showInvoices', 'as' => 'account.invoices']);
+});
+
 Route::group(['middleware' => ['web', 'auth', 'admin']], function() {
 	Route::get('admin', 'AdminController@show');
 	

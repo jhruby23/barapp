@@ -14,21 +14,21 @@ class Order extends Model
 	
 	public function items()
 	{
-		return $this->hasMany('App\OrderItem');
+		return $this->hasMany(OrderItem::class);
 	}
 	
 	public function buyer()
 	{
-		return $this->belongsTo('App\User');
+		return $this->belongsTo(User::class);
 	}
 	
 	public function unpaid($query)
 	{
-		return $query->where('invoice_nr', '');
+		return $query->where('invoice_nr', NULL);
 	}
 	
 	public function paid($query)
 	{
-		return $query->where('inovice_nr', '!=', '');
+		return $query->where('inovice_nr', '!=', NULL);
 	}
 }

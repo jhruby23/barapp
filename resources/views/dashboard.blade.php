@@ -1,18 +1,17 @@
 @extends('app')
 
-@section('content')
+@section('content') 
+	<h2>Hi, {{ Auth::user()->first_name }}!
 	
-	<div class="jumbotron">
-		<div class="container">
-			<h1>NODE5 Bar app</h1>
-		</div>
-	</div>
+	@if(Auth::user()->isMember())
+		Your current spendings: {{ $spendings }} Kč
+	@endif
+	</h2>
 	
-	<h2>Hi, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} from {{ Auth::user()->team->name }}!</h2>
-	<p>{{ link_to_route('logout', 'Cancel order') }}</p>
+	<p>{{ link_to_route('logout', 'Log out') }}</p>
 	
-	@if(Auth::user()->isAdmin())
-	<p><a href="admin">Go to admin panel</a></p>
+	@if(Auth::user()->isMember())
+		<p>{{ link_to_route('account.orders', 'Account') }}</p>
 	@endif
 	
 	<hr>
@@ -26,15 +25,15 @@
 	<div id="products">
 		<h2>Products</h2>
 		
-		<ul class="nav nav-pills nav-justified">
+		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a href="#food">Food</a></li>
 			<li><a href="#drinks">Drinks</a></li>
 			<li><a href="#other">Other</a></li>
 		</ul>
 		
-		<ul id="food" class="offer">
+		<ul id="food" class="offer list-group">
 		@foreach($food as $product)
-			<li>
+			<li class="list-group-item">
 				<p>{{ $product->name }}</p>
 				<p>{{ $product->description }}</p>
 				@if(Auth::user()->isGuest())
@@ -48,9 +47,9 @@
 		@endforeach
 		</ul>
 		
-		<ul id="drinks" class="offer" style="display: none;">
+		<ul id="drinks" class="offer list-group" style="display: none;">
 		@foreach($drinks as $product)
-			<li>
+			<li class="list-group-item">
 				<p>{{ $product->name }}</p>
 				<p>{{ $product->description }}</p>
 				@if(Auth::user()->isGuest())
@@ -64,9 +63,9 @@
 		@endforeach
 		</ul>
 		
-		<ul id="other" class="offer" style="display: none;">
+		<ul id="other" class="offer list-group" style="display: none;">
 		@foreach($other as $product)
-			<li>
+			<li class="list-group-item">
 				<p>{{ $product->name }}</p>
 				<p>{{ $product->description }}</p>
 				@if(Auth::user()->isGuest())
@@ -86,20 +85,6 @@
 	<div id="checkout">
 		@include('partials.checkout')
 	</div>
-	
-	@if(!Auth::user()->isGuest())
-	<hr>
-
-	<div id="orders">
-		@include('partials.orders')
-	</div>
-	
-	<hr>
-	
-	<div id="preferences">
-		@include('partials.preferences')
-	</div>
-	@endif
 	
 	<div style="width: 100%; height: 50px;"></div>
 	

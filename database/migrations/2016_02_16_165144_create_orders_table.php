@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('total_price');
-            $table->string('invoice_nr');
+            $table->string('invoice_nr')->nullable();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users');

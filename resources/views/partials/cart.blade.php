@@ -1,6 +1,4 @@
-	<h2>Shopping cart</h2>
-	<p>Total price: {{ $price }} Kč</p>
-	<p><a href="#" id="empty-cart">Empty cart</a></p>
+	<h2>Order</h2>
 	<ul>
 	@foreach($items as $item)
 		<li>
@@ -13,5 +11,8 @@
 	</ul>
 	
 	@if($items)
-		<a href="#" role="checkout">Checkout</a>
+		<p><a href="#" role="checkout">Checkout {{ $price }} Kč</a></p>
+		<p><a href="#" id="empty-cart">Cancel order</a></p>
+	@else
+		<p>No items in cart!</p>
 	@endif
