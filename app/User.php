@@ -50,7 +50,12 @@ class User extends Authenticatable
     
     public function unpaidOrders()
     {
-	    return $this->hasMany(Order::class)->where('invoice_nr', NULL);
+	    return $this->hasMany(Order::class)->whereNull('invoice_nr');
+    }
+    
+    public function paidOrders()
+    {
+	    return $this->hasMany(Order::class)->whereNotNull('invoice_nr');
     }
     
     public function isGuest()

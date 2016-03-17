@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('member_price');
             $table->integer('guest_price');
             $table->boolean('enabled');
+            $table->integer('position');
             
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Auth;
 use App\Customer;
 use App\User;
+use App\Order;
 
 class AccountController extends Controller
 {
@@ -30,5 +31,14 @@ class AccountController extends Controller
 		});
 		
 		return view('account.group', compact('group', 'spendings'));
+	}
+	
+	public function showInvoices()
+	{
+		$group = User::where('customer_id', Auth::user()->customer->id)->lists('id')->toArray();
+		
+		$invoices = Order::whereNotNull('invoice_nr')->whereIn('user_id', $group)->groupBy('invoice_nr')->selectRaw('invoice_nr, sum(total_price) as total_price')->get();
+		
+		return view('account.invoices', compact('invoices'));
 	}
 }
