@@ -22,13 +22,13 @@ class Order extends Model
 		return $this->belongsTo(User::class);
 	}
 	
-	public function unpaid($query)
+	public function scopeUnpaid($query)
 	{
-		return $query->where('invoice_nr', NULL);
+		return $query->whereNull('invoice_nr');
 	}
 	
-	public function paid($query)
+	public function scopePaid($query)
 	{
-		return $query->where('inovice_nr', '!=', NULL);
+		return $query->whereNotNull('invoice_nr');
 	}
 }

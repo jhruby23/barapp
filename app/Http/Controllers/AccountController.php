@@ -21,14 +21,11 @@ class AccountController extends Controller
 	
 	public function showGroup()
 	{
-		$group = User::with('unpaidOrders')->where('customer_id', Auth::user()->customer->id)->get();
+		$customer_id = Auth::user()->customer->id;
 		
-		$spendings = $group->sum(function($user){
-			$sum = 0;
-			foreach($user->unpaidOrders as $order)
-				$sum += $order->total_price;
-			return $sum;
-		});
+		$group = User::with('unpaidOrders')->where('customer_id', $customer_id)->get();
+		
+		$spendings = Customer::find($customer_id)->unpaidOrders->sum('total_price');
 		
 		return view('account.group', compact('group', 'spendings'));
 	}
@@ -37,7 +34,7 @@ class AccountController extends Controller
 	{
 		$group = User::where('customer_id', Auth::user()->customer->id)->lists('id')->toArray();
 		
-		$invoices = Order::whereNotNull('invoice_nr')->whereIn('user_id', $group)->groupBy('invoice_nr')->selectRaw('invoice_nr, sum(total_price) as total_price')->get();
+		$invoices = Order::paid()->whereIn('user_id', $group)->groupBy('invoice_nr')->selectRaw('invoice_nr, sum(total_price) as total_price')->get();
 		
 		return view('account.invoices', compact('invoices'));
 	}
