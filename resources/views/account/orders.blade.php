@@ -16,9 +16,7 @@
 				<p>Total price {{ $order->total_price }} Kč</p>
 				
 				@foreach($order->items as $item)
-					{{ $item->product->name }}
-					{{ $item->subtotal_price }} Kč
-					<a href="#">Request refund</a>
+					<p>{{ $item->product->name }}	{{ $item->subtotal_price }} Kč <a href="#">Request refund</a></p>
 				@endforeach
 			</li>
 		@endforeach

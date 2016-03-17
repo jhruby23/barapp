@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
 	});
 	
 	$('#cart').on('click', 'a[role*="remove-from-cart"]', function(e){	
-		e.preventDefault();	
+		e.preventDefault();
 		$.ajax({
 			url: 'remove-from-cart/'+$(this).data('id'),
 			type: 'POST',

@@ -5,7 +5,7 @@
 @endsection
 
 @section('data')
-	<h2>Your group</h2>
+	<h2>Your group spendings</h2>
 
 	<ul class="list-group">
 	@foreach($group as $user)

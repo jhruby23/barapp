@@ -1,12 +1,11 @@
 	<h2>Order</h2>
-	<ul>
+	<ul class="list-group">
 	@foreach($items as $item)
-		<li>
-			<p>Name: {{ $item['name'] }}</p>
-			<p>Quantity: <a href="#" data-id="{{ $item['id'] }}" role="remove-from-cart">-</a> {{ $item['qty'] }} <a href="#" data-id="{{ $item['id'] }}" role="add-to-cart">+</a></p>
-			<p>Price: {{ $item['price'] }} Kč</p>
-			<p>Subtotal: {{ $item['subtotal'] }} Kč</p>
+		@for($i = 0; $i < $item['qty']; $i++)
+		<li class="list-group-item">
+			<p>{{ $item['name'] }} {{ $item['price'] }} Kč <a href="#" data-id="{{ $item['id'] }}" role="remove-from-cart">x</a></p>
 		</li>
+		@endfor
 	@endforeach
 	</ul>
 	
