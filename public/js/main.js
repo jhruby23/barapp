@@ -39,18 +39,18 @@ jQuery(document).ready(function($){
 			url: 'checkout',
 			type: 'POST',
 		}).done(function(result){
-			$('#checkout').html(result);
+			$('[data-remodal-id=checkout]').html(result);
+			$('[data-remodal-id=checkout]').remodal().open();
 		});
 	});
 	
-	$('#checkout').on('click', 'a[role*="make-order"]', function(e){
-		e.preventDefault();
+	$(document).on('confirmation', '[data-remodal-id=checkout]', function () {
 		$.ajax({
 			url: 'make-order',
 			type: 'POST',
 		}).done(function(result){
 			alert('Order completed!');
-			window.location.href = '/';
+			window.location.href = '/logout';
 		});
 	});
 	
@@ -115,5 +115,13 @@ jQuery(document).ready(function($){
 		
 		if($val == 'remove')
 			$ul.parent('div').parent('div').parent('div').hide();
+	});
+	
+	$(document).on('confirmation', '.remodal', function () {
+		//alert('Confirmation button is clicked');
+	});
+	
+	$(document).on('cancellation', '.remodal', function () {
+		//alert('Cancel button is clicked');
 	});
 });

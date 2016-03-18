@@ -1,11 +1,4 @@
-	<h2>Checkout</h2>
-	<p>Total price: {{ $price }} Kč</p>
-	<ul>
-	@foreach($items as $item)
-		<li>{{ $item['qty'] }}x {{ $item['name'] }} {{ $item['subtotal'] }} Kč</p>
-		</li>
-	@endforeach
-	</ul>
-	
-	<p><a href="#" role="cancel-checkout">Cancel</a></p>
-	<p><a href="#" role="make-order">Make order</a></p>
+	<h1>{{ $price }} Kč</h1>
+	<p>Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.</p>
+	<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+	<button data-remodal-action="confirm" class="remodal-confirm" role="make-order">Checkout</button>

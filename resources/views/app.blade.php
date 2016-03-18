@@ -6,7 +6,9 @@
 	<title>NODE5 Bar app</title>
 	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-	<!--<link href="/css/style.css" rel="stylesheet">-->
+	{{-- Html::style('/css/style.css') --}}
+	{{ Html::style('/css/remodal.css') }}
+	{{ Html::style('/css/remodal-default-theme.css') }}
 	
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -19,5 +21,6 @@
 	@yield('content')
 	
 	</div>
+	{{ Html::script('/js/remodal.min.js') }}
 </body>
 </html>

@@ -80,9 +80,7 @@
 		</ul>
 	</div>
 	
-	<hr>
-	
-	<div id="checkout">
+	<div class="remodal" data-remodal-id="checkout">
 		@include('partials.checkout')
 	</div>
 	
