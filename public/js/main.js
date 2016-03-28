@@ -33,6 +33,7 @@ jQuery(document).ready(function($){
 		});
 	});
 	
+	$timer = null;
 	$('#cart').on('click', 'a[role*="checkout"]', function(e){
 		e.preventDefault();
 		$.ajax({
@@ -41,6 +42,15 @@ jQuery(document).ready(function($){
 		}).done(function(result){
 			$('[data-remodal-id=checkout]').html(result);
 			$('[data-remodal-id=checkout]').remodal().open();
+			$timeText = $('[data-remodal-id=checkout]').find('p#autocheckout span');
+			$timer = setInterval(function(){
+				$time = $timeText.text();
+				if($time == 1){
+					$('button[data-remodal-action="confirm"]').trigger('click');
+					clearInterval($timer);
+				}
+				$timeText.text($time-1);
+			}, 1000);
 		});
 	});
 	
@@ -52,6 +62,10 @@ jQuery(document).ready(function($){
 			alert('Order completed!');
 			window.location.href = '/logout';
 		});
+	});
+	
+	$(document).on('cancellation', '[data-remodal-id=checkout]', function () {
+		clearInterval($timer);
 	});
 	
 	$('#orders').on('click', 'a[role*="refund"]', function(e){
